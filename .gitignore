@@ -1,0 +1,38 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env
+
+# Cache files
+*.cache
+*.log
+*.pot
+
+# Pytest cache
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Python egg files
+*.egg
+*.egg-info/
+dist/
+build/
+
+# IDE-specific files
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# System-specific files
+.DS_Store
+Thumbs.db
+
+# Screenshots
+screenshots/
