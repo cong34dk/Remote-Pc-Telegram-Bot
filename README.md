@@ -22,7 +22,7 @@ A Telegram bot that can control your PC through various commands
 1. **Clone the Repo:**
    ```bash
    git clone https://github.com/cong34dk/Remote-Pc-Telegram-Bot.git
-   cd remote-pc-telegram-bot
+   cd Remote-Pc-Telegram-Bot
    ```
 
 2. **Install Dependencies:**
@@ -32,7 +32,7 @@ A Telegram bot that can control your PC through various commands
 
 3. **Create `.env` File:**
    ```bash
-   cp .env.example .env
+   copy .env.example .env
    ```
    Edit `.env` and put your Telegram bot token:
    ```
