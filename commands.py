@@ -45,4 +45,35 @@ def open_app(app_name):
         return f"Đang mở {app_name}..."
     except Exception as e:
         return f"Không thể mở {app_name}. Lỗi: {str(e)}"
+    
 
+# Điều khiển media
+def control_media(action):
+    try:
+        if action == "play_pause":
+            pyautogui.hotkey('space')  # Play/Pause
+            return "Đã thực hiện lệnh Play/Pause."
+        
+        elif action == "next":
+            pyautogui.hotkey('right')  # Next Track
+            return "Đã thực hiện lệnh Next."
+        
+        elif action == "previous":
+            pyautogui.hotkey('left')  # Previous Track
+            return "Đã thực hiện lệnh Previous."
+        
+        elif action == "volume_up":
+            pyautogui.hotkey('volumeup')  # Volume Up
+            return "Đã thực hiện lệnh Volume Up."
+        
+        elif action == "volume_down":
+            pyautogui.hotkey('volumedown')  # Volume Down
+            return "Đã thực hiện lệnh Volume Down."
+        
+        elif action == "mute":
+            pyautogui.hotkey('volumemute')  # Mute
+            return "Đã thực hiện lệnh Mute."
+        
+        return "Lệnh không hợp lệ."
+    except Exception as e:
+        return f"Không thể thực hiện lệnh. Lỗi: {str(e)}"

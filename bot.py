@@ -2,7 +2,7 @@ import telebot
 import os
 from dotenv import load_dotenv
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton  
-from commands import capture_screenshot, shutdown, restart, get_system_status, open_app
+from commands import capture_screenshot, shutdown, restart, get_system_status, open_app, control_media
 
 # Load biến môi trường từ file .env
 load_dotenv()
@@ -24,7 +24,8 @@ def send_welcome(message):
         "/shutdown - Tắt máy tính\n"
         "/restart - Khởi động lại máy tính\n"
         "/status - Xem trạng thái hệ thống\n"
-        "/openapp - Mở ứng dụng"
+        "/openapp - Mở ứng dụng\n"
+        "/control - Điều khiển media"
     )
 
 # Lệnh chụp màn hình
@@ -69,9 +70,34 @@ def handle_openapp_callback(call):
     response = open_app(app_name)  # Gọi hàm mở app
     bot.send_message(call.message.chat.id, response)  # Trả lời người dùng
 
+
+# Lệnh điều khiển media
+@bot.message_handler(commands=["control"])
+def control(message):
+    markup = InlineKeyboardMarkup()
+    markup.add(
+        InlineKeyboardButton("Play/Pause", callback_data="control_play_pause"),
+        InlineKeyboardButton("Next", callback_data="control_next"),
+        InlineKeyboardButton("Previous", callback_data="control_previous"),
+        InlineKeyboardButton("Volume Up", callback_data="control_volume_up"),
+        InlineKeyboardButton("Volume Down", callback_data="control_volume_down"),
+        InlineKeyboardButton("Mute", callback_data="control_mute")
+    )
+    bot.reply_to(message, "Chọn điều khiển media bạn muốn thực hiện:", reply_markup=markup)
+
+# Xử lý khi người dùng chọn điều khiển media
+@bot.callback_query_handler(func=lambda call: call.data.startswith("control_"))
+def handle_control_callback(call):
+    action = call.data.split("_")[1]  # Lấy hành động từ callback_data
+    response = control_media(action)  # Gọi hàm điều khiển media
+    bot.send_message(call.message.chat.id, response)  # Trả lời người dùng
+    
+    
 # Chạy bot
 try:
     print("Bot đang chạy...")
     bot.polling()
 except Exception as e:
     print(f"Lỗi khi chạy bot: {e}")
+
+
